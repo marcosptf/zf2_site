@@ -1,13 +1,46 @@
 <div class="jumbotron">
 <form>
 <?php foreach ($posts as $post) : ?>
-      <h1><?php echo $post->title;?></h1>
+    Post Title:<input type="text" id="titlePost" name="titlePost" value="<?php echo $post->title;?>" />
+    <br/>
+    Post:
     <textarea name="editor1" id="editor1" rows="10" cols="80">
        <?php echo $post->text_post; ?>    
     </textarea>
+    <br/>
+    Active:
+    <input type="checkbox" id="active" name="active" value="<?php echo $post->title;?>" />
     <script>
-       CKEDITOR.replace( 'editor1' );
-       var data = CKEDITOR.instances.editor1.getData();
+      CKEDITOR.replace( 'editor1' );
+      var data, titlePost, active;
+       
+      $('#fi').click(function() {
+	  data      = CKEDITOR.instances.editor1.getData();
+	  titlePost = $("#titlePost").val();
+	  active    = $("#active").val();
+	  $("#loadAjax").css({'display' : 'inline-block', '*display' : 'inline', 'zoom' : '1'});
+	  document.getElementById("respQtdeCarros").style.display="none";
+	  
+
+	  $.post("" ,{postData:data, postTitle:titlePost, postActive:active },function(postResp){
+	      document.getElementById("btnBuscar").href=path+"?mc="+$("#MarcaSelect").val()+"&md=&pc=&lj=";
+	      $(".info-load").css('display','block');
+	      $("#respQtdeCarros").html("Estoque: Temos "+dataQtdeCarros+" carro(s) para você");
+
+	      if(dataQtdeCarros > 0){
+		  $('.content-visualizar').show("slow");
+		  $('#btnBuscar').show("slow");
+	      }else{
+		  $('.content-visualizar').hide("slow");
+		  $('#btnBuscar').hide("slow");
+	      }
+
+	  }).complete(function(){
+	    disableLoading();
+	  });
+
+      });
+  
     </script>
 <?php endforeach; ?>    
 </form>
