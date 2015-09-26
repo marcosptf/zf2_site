@@ -1,0 +1,16 @@
+<div class="jumbotron">
+<form>
+<?php foreach ($posts as $post) : ?>
+      <h1><?php echo $post->title;?></h1>
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+       <?php echo $post->text_post; ?>    
+    </textarea>
+    <script>
+       CKEDITOR.replace( 'editor1' );
+       var data = CKEDITOR.instances.editor1.getData();
+    </script>
+<?php endforeach; ?>    
+</form>
+</div>
+
+
