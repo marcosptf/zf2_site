@@ -1,4 +1,4 @@
-ZendSkeletonApplication
+Software4you web site
 =======================
 
 Introduction
