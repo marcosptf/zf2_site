@@ -1,6 +1,9 @@
 <div class="jumbotron">
-<h1>clientes</h1>
     <img src="<?php echo $this->basePath('img/img-2.png') ?>" alt="banner"/>
+<?php foreach ($user as $use) : ?>
+         <?php echo $use->title; ?>
+         <?php echo $use->text_post; ?> 
+<?php endforeach; ?>        
     <img src="<?php echo $this->basePath('img/img-4.png') ?>" alt="serviços"/>
 </div>
 

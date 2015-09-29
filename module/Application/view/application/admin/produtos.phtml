@@ -1,7 +1,62 @@
 <div class="jumbotron">
-produtos
-    <img src="<?php echo $this->basePath('img/img-2.png') ?>" alt="banner"/>
-    <img src="<?php echo $this->basePath('img/img-4.png') ?>" alt="serviços"/>
+<form>
+<h3><b>Admin site</b> - PRODUTOS</h3>
+<br/>
+<?php foreach ($posts as $post) : ?>
+    Post Title:&nbsp;&nbsp;&nbsp;<input type="text" id="titlePost" name="titlePost" value="<?php echo $post->title;?>" />
+    <br/><br/>
+    <textarea name="editor1" id="editor1" rows="10" cols="80">
+       <?php echo $post->text_post; ?>    
+    </textarea>
+    <br/>
+    <?php 
+    //var_dump($post->active);
+      if ( $post->active=="1" ) { 
+          $checkEnable = "checked"; 
+          $checkDisable = ""; 
+      } else {
+          $checkEnable = ""; 
+          $checkDisable = "checked";      
+      }
+    ?>
+    Enable:
+    <input type="radio" id="activePost1" name="activePost" value="1"  <?php echo $checkEnable; ?> />
+    Disable:
+    <input type="radio" id="activePost0" name="activePost" value="0" <?php echo $checkDisable; ?> />    
+    <input type="hidden" id="idPost" name="idPost" value="<?php echo $post->id; ?>" />  
+<?php endforeach; ?>    
+    <br/>
+    <br/>    
+    <input type="button" id="sendPost" name="sendPost" value="Create Post" />
+</form>
+    <script>
+      CKEDITOR.replace('editor1');
+      var data, titlePost, active, idPost, category;
+       
+      $('#sendPost').click(function() {
+	  data      = CKEDITOR.instances.editor1.getData();
+	  titlePost = $("#titlePost").val();
+	  active    = ((document.getElementById("activePost1").checked) ? ("true") : ("false"));
+	  idPost    = $("#idPost").val();
+	  category  = "4";
+	  console.log("debugger=> "+idPost);
+
+	  $.post("http://127.0.0.1:8080/admin/requestpost" ,{
+	      postData : data, 
+	      postTitle : titlePost, 
+	      postActive : active,
+	      postID : idPost,
+	      postCategory : category
+	    },function(postResp){
+	      if(postResp=="true"){
+	          alert("Post submited with sucess!");
+	      } else {
+	          alert("oops! something wrong :-(" + postResp);
+	      }
+	  });
+      });
+  
+    </script>
 </div>
 
 

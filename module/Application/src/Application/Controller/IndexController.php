@@ -22,23 +22,38 @@ class IndexController extends AbstractActionController {
     }
 
     public function sobrenosAction() {
-        return new ViewModel();
+        return new ViewModel(array(
+            'user' => $this->getPostTable()->fetchAll(5)
+        ));
+        return new ViewModel();    
     }
     
     public function carreiraAction() {
-        return new ViewModel();
+        return new ViewModel(array(
+            'user' => $this->getPostTable()->fetchAll(6)
+        ));
+        return new ViewModel();    
     }
     
     public function clientesAction() {
-        return new ViewModel();
+        return new ViewModel(array(
+            'user' => $this->getPostTable()->fetchAll(2)
+        ));
+        return new ViewModel();        
     }    
     
     public function servicosAction() {
-        return new ViewModel();
+        return new ViewModel(array(
+            'user' => $this->getPostTable()->fetchAll(3)
+        ));
+        return new ViewModel();    
     }    
     
     public function produtosAction() {
-        return new ViewModel();
+        return new ViewModel(array(
+            'user' => $this->getPostTable()->fetchAll(4)
+        ));
+        return new ViewModel();    
     }    
     
     public function contatoAction() {

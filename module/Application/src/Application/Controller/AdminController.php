@@ -26,22 +26,37 @@ class AdminController extends AbstractActionController {
     }
 
     public function sobrenosAction() {
+        return new ViewModel(array(
+            'posts' => $this->getPostTable()->fetchAll(5)
+        ));
         return new ViewModel();
     }
     
     public function carreiraAction() {
+        return new ViewModel(array(
+            'posts' => $this->getPostTable()->fetchAll(6)
+        ));
         return new ViewModel();
     }
     
     public function clientesAction() {
+        return new ViewModel(array(
+            'posts' => $this->getPostTable()->fetchAll(2)
+        ));
         return new ViewModel();
     }    
     
     public function servicosAction() {
+        return new ViewModel(array(
+            'posts' => $this->getPostTable()->fetchAll(3)
+        ));
         return new ViewModel();
     }    
     
     public function produtosAction() {
+        return new ViewModel(array(
+            'posts' => $this->getPostTable()->fetchAll(4)
+        ));
         return new ViewModel();
     }    
     
