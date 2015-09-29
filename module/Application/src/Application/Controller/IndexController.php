@@ -8,6 +8,7 @@ use Zend\View\Model\ViewModel;
 class IndexController extends AbstractActionController {
 
     protected $userTable;
+    protected $postTable;    
 
     public function adminAction() {
         return new ViewModel();
@@ -15,7 +16,7 @@ class IndexController extends AbstractActionController {
 
     public function indexAction() {
         return new ViewModel(array(
-            'user' => $this->getUserTable()->fetchAll()
+            'user' => $this->getPostTable()->fetchAll(1)
         ));
         return new ViewModel();        
     }
@@ -51,5 +52,13 @@ class IndexController extends AbstractActionController {
       }
       return $this->userTable;
     }
+    
+    public function getPostTable() {
+      if (!$this->postTable) {
+        $sm = $this->getServiceLocator();
+        $this->postTable = $sm->get('Application\Model\PostTable');
+      }
+      return $this->postTable;
+    }    
     
 }

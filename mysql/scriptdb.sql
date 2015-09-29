@@ -5,9 +5,8 @@
 
 titulo/ texto / imagem/ logo cliente
 
-drop database software4you;
+drop database if exists software4you;
 create database software4you;
-
 
 CREATE TABLE IF NOT EXISTS `software4you`.`category` (
 `id` INT(4) NOT NULL auto_increment,
@@ -25,13 +24,26 @@ values
 ('sobrenos'),
 ('carreira');
 
+drop table post;
 CREATE TABLE IF NOT EXISTS `software4you`.`post` (
 `id` INT(4) NOT NULL auto_increment,
 `title` VARCHAR(100) NOT NULL,
 `text_post` text,
-`active` int(1) NULL DEFAULT 0 ,
+`category` int(1) not NULL ,
+`active` int(1) not NULL DEFAULT 1,
 PRIMARY KEY (`id`)
 ) ENGINE = MyISAM DEFAULT CHARACTER SET = utf8;
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',1);
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',2);
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',3);
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',4);
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',5);
+insert into post(title,text_post,category)values('texto de la muestra','texto del post muestra',6);
+
+
+
+select * from post;
+
 
 
 CREATE TABLE `software4you`.`user` (
@@ -99,33 +111,4 @@ CREATE TABLE `software4you`.`collectionfield` (
   CONSTRAINT `fk_collection_has_field_field1` FOREIGN KEY (`field_id`) REFERENCES `field` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE = MyISAM  DEFAULT CHARACTER SET = utf8;
 
-use software4you;
-select * from user;
-
-
-
-
-
 /*********************************************************************************/
-git add module/Application/src/Application/Model/PostTable.php
-touch module/Application/src/Application/Model/UserTable.php
-touch module/Application/src/Application/Model/RoleTable.php
-touch module/Application/src/Application/Model/ProfileTable.php
-touch module/Application/src/Application/Model/PhinxlogTable.php
-touch module/Application/src/Application/Model/FieldTable.php
-touch module/Application/src/Application/Model/CollectionTable.php
-touch module/Application/src/Application/Model/CollectionfieldTable.php
-touch module/Application/src/Application/Model/PostTable.php
-touch module/Application/src/Application/Model/UserTable.php
-touch module/Application/src/Application/Model/RoleTable.php
-touch module/Application/src/Application/Model/ProfileTable.php
-touch module/Application/src/Application/Model/PhinxlogTable.php
-touch module/Application/src/Application/Model/FieldTable.php
-touch module/Application/src/Application/Model/CollectionTable.php
-touch module/Application/src/Application/Model/CollectionfieldTable.php
-
-
-
-
-
-

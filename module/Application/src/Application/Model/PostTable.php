@@ -17,9 +17,10 @@ namespace Application\Model;
          $this->tableGateway = $tableGateway;
      }
 
-     public function fetchAll()
+     public function fetchAll($cat)
      {
-         $resultSet = $this->tableGateway->select();
+         //$resultSet = $this->tableGateway->select();
+         $resultSet = $this->tableGateway->select(array('category' => $cat));
          return $resultSet;
      }
 
@@ -34,20 +35,21 @@ namespace Application\Model;
          return $row;
      }
 
-     public function savePost(User $user)
+     public function savePost(Post $user)
      {
          $data = array(
              'id' => $user->id,
              'title'  => $user->title,
              'text_post' => $user->text_post,
              'active' => $user->active,
+             'category' => $user->category
          );
 
          $id = (int) $user->id;
          if ($id == 0) {
              $this->tableGateway->insert($data);
          } else {
-             if ($this->getUser($id)) {
+             if ($this->getPost($id)) {
                  $this->tableGateway->update($data, array('id' => $id));
              } else {
                  throw new \Exception('User id does not exist');

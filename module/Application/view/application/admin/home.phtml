@@ -1,6 +1,6 @@
 <div class="jumbotron">
 <form>
-<h3><b>Admin site</b></h3>
+<h3><b>Admin site</b> - HOME</h3>
 <br/>
 <?php foreach ($posts as $post) : ?>
     Post Title:&nbsp;&nbsp;&nbsp;<input type="text" id="titlePost" name="titlePost" value="<?php echo $post->title;?>" />
@@ -26,46 +26,34 @@
     <input type="hidden" id="idPost" name="idPost" value="<?php echo $post->id; ?>" />  
 <?php endforeach; ?>    
     <br/>
-    <select name="categoryPost" >
-        <option value="1">home</option>
-	<option value="2">clientes</option>
-	<option value="3">servicos</option>
-	<option value="4">produtos</option>
-	<option value="5">sobrenos</option>
-	<option value="6">carreira</option>
-    </select>
     <br/>    
     <input type="button" id="sendPost" name="sendPost" value="Create Post" />
 </form>
     <script>
       CKEDITOR.replace('editor1');
-      var data, titlePost, active, idPost;
+      var data, titlePost, active, idPost, category;
        
       $('#sendPost').click(function() {
 	  data      = CKEDITOR.instances.editor1.getData();
 	  titlePost = $("#titlePost").val();
 	  active    = ((document.getElementById("activePost1").checked) ? ("true") : ("false"));
 	  idPost    = $("#idPost").val();
-	  //$("#loadAjax").css({'display' : 'inline-block', '*display' : 'inline', 'zoom' : '1'});
-	  //document.getElementById("respQtdeCarros").style.display="none";
+	  category  = "1";
 	  console.log("debugger=> "+idPost);
 
 	  $.post("http://127.0.0.1:8080/admin/requestpost" ,{
 	      postData : data, 
 	      postTitle : titlePost, 
 	      postActive : active,
-	      postID : idPost
+	      postID : idPost,
+	      postCategory : category
 	    },function(postResp){
 	      if(postResp=="true"){
 	          alert("Post submited with sucess!");
 	      } else {
 	          alert("oops! something wrong :-(" + postResp);
 	      }
-	      
-	  }).complete(function(){
-	     //disableLoading();
 	  });
-
       });
   
     </script>
